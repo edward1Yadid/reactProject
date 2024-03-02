@@ -70,7 +70,7 @@ Installation
 
 To install and run the Business Card and User Management System locally, follow these steps:
 
-    1.Clone the repository:git clone https://github.com/your-username/business-card-system.git
+    1.Clone the repository:git clone https://github.com/edward1Yadid/reactProject
     2.  Open the index.html file in your preferred web browser to start using the app.
 
 
