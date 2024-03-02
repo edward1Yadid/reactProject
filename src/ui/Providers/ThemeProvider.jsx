@@ -1,6 +1,6 @@
 import { createContext, useCallback, useContext, useMemo, useState } from "react";
 import { createTheme, ThemeProvider as MuiThemeProvider } from "@mui/material/styles";
-import { node } from "prop-types";
+import  {node}  from "prop-types";
 
 const ThemeContext = createContext(null);
 
@@ -41,6 +41,6 @@ export const useTheme = () => {
     return context;
 }
 
-ThemeProvider.propTypes = {
+ThemeProvider.propTypes={
     children: node.isRequired,
-};
+}

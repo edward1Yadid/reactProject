@@ -9,14 +9,26 @@ import CardFooter from "./CardFooter";
 export default function CardGeneral({ card,deleteMyCard,likedCard }) {
   const navigate = useNavigate();
   return (
-    <Card
-      sx={{
-        minWidth: 280,
-        maxWidth: 350,
-        backgroundColor: "#cccccc",
-        opacity: 0.9,
-        m: 2,
+    <>
+     <div
+      style={{
+        display: "inline-block", 
+        borderRadius: "12px", 
+        borderTop: "4px solid #a0a0a0", 
+        borderBottom: "4px solid #a0a0a0", 
+        overflow: "hidden", 
       }}
+    ></div>
+
+
+    <Card
+    sx={{
+      minWidth: 280,
+      maxWidth: 350,
+      backgroundColor: "#f0f0f0", 
+      borderRadius: "inherit",
+      m: 2,
+    }}
     >
       <CardActionArea
         sx={{ display: "flex", flexDirection: "column" }}
@@ -29,5 +41,7 @@ export default function CardGeneral({ card,deleteMyCard,likedCard }) {
       </CardActionArea>
       <CardFooter {...{ deleteMyCard, card,likedCard }}></CardFooter>
     </Card>
+    </>
+   
   );
 }

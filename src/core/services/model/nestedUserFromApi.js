@@ -1,10 +1,15 @@
 export const nestedUserFromApi = (user) => ({
-  first: user.first,
-  middle: user.middle,
-  last: user.last,
+  first: user.name.first,
+  middle: user.name.middle,
+  last: user.name.last,
   phone: user.phone,
-  url: user.url,
-  alt: user.alt,
-  ...{ ...user.address },
-  isBusiness: true,
+  url: user.image.url,
+  alt: user.image.alt,
+  state:user.address.state,
+  country: user.address.country,
+  city: user.address.city,
+  street:user.address.street,
+  houseNumber: user.address.houseNumber,
+  zip: user.address.zip,
+
 });

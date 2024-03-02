@@ -12,6 +12,7 @@ import CardDetailPage from "../../ui/pages/CardDetailPage";
 import EditCard from "../hooks/cards/pages/EditCard";
 import CreateNewCard from "../../ui/pages/CreateNewCard";
 import EditUserProfile from "../../ui/pages//EditUserProfile";
+import UserProlie from "../../ui/pages/UserProlie";
 
 const Router = () => {
   return (
@@ -36,6 +37,8 @@ User Routes
         path={NavigateToComponents.Edit_User}
         element={<EditUserProfile />}
       ></Route>
+
+      <Route path={NavigateToComponents.USER_PROFILE} element={<UserProlie/>}></Route>
       {/*
 Card Routes
 */}
@@ -49,7 +52,7 @@ Card Routes
         element={<MyCardPage />}
       ></Route>
       <Route
-        path={`${NavigateToComponents.Card_deatils}/:id`}
+           path={`${NavigateToComponents.Card_deatils}/:id`}
         element={<CardDetailPage />}
       ></Route>
       <Route

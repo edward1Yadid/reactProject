@@ -1,4 +1,4 @@
-import { createContext, useContext, useMemo, useState } from "react";
+import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { getTokenFromLockStorage, defindUser } from "../../../core/helpers/userLoggedInLocalStorage";
 import { node } from "prop-types";
 
@@ -13,6 +13,13 @@ if(tokenfomlocak){
 }
 return tokenfomlocak;
   })
+  useEffect(() => {
+    if (!user) {
+        const userFromLS = defindUser();
+        setUser(userFromLS);
+    }
+}, [user])
+
   const value = useMemo(() => ({ user, setUser, token, setToken }), [user, token]);
 
   return (

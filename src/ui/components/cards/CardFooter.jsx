@@ -4,8 +4,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditModeIcon from "@mui/icons-material/Edit";
 import CallIcon from "@mui/icons-material/Call";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import usecustomCard from "../../../core/hooks/cards/usecustomCard";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import NavigateToComponents from "../../../core/router/NavigateToComponents";
 import { useUser } from "../../Providers/user/UserProvider";
 import useFetchCards from "../../../core/hooks/cards/useFetchCards";
@@ -34,6 +33,7 @@ const CardFooter = ({ card, deleteMyCard ,likedCard}) => {
     deleteMyCard(card._id);
   };
   const handleLikeCARD = async () => {
+    if(!user) return null
     toggleLikedCard((memoizedLikedCardState) => !memoizedLikedCardState);
     await hadleLikeCard(card._id);
     await likedCard()

@@ -5,12 +5,12 @@ import ExpirienceCustomers from '../../core/store/ExpirienceCustomers'
 
 
 function FavoriteCard() {
-  const {value:{isloading,error,cards},handleDeleteCard,handleGetMyFavCard}=useFetchCards()
+  const {value:{Isloading,error,cards},handleDeleteCard,handleGetMyFavCard}=useFetchCards()
 
 
-useEffect(()=>{
-  handleGetMyFavCard()
-},[])
+useEffect( ()=>{
+   handleGetMyFavCard()
+},[ ])
 
 
 const changeCardsFev=useCallback(async()=>{
@@ -23,8 +23,8 @@ const deleteMyCard=useCallback(async(cardid)=>{
 },[])
   return (
 <>
-<GeneralPageCompenent title={"Favorite Card"} subtitle={"welcome to your favorite card page"}></GeneralPageCompenent>
-   <ExpirienceCustomers isloading={isloading} errro={error} cards={cards} likedCard={changeCardsFev} deleteMyCard={deleteMyCard}/>
+<GeneralPageCompenent title={"Favorite Business Cards"} subtitle={"Easily Access and Prioritize Your Top Connections"}></GeneralPageCompenent>
+   <ExpirienceCustomers Isloading={Isloading} errro={error} cards={cards} likedCard={changeCardsFev} deleteMyCard={deleteMyCard}/>
 </>
 
 

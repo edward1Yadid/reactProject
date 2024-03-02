@@ -43,8 +43,9 @@ const onchangeCheckValid = useCallback((e) => {
 const formValidate=useCallback(()=>{
     const schemaValidate=Joi.object(schema)
     const {error}=schemaValidate.validate(datafromApi)///בדיקה מול כל הדאטה הקיימת בסטייט
-    if(error) return error
-return null
+    if(error) return error;
+    return null; 
+
 },[schema,datafromApi])
 
 

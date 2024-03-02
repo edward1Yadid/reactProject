@@ -1,7 +1,7 @@
 import axios from "axios"
 
 
-
+const count=0
 
 export const ApiUrl="https://monkfish-app-z9uza.ondigitalocean.app/bcard2/users"
 
@@ -11,7 +11,8 @@ export const ApiUrl="https://monkfish-app-z9uza.ondigitalocean.app/bcard2/users"
         return response.data
 }
  catch (error) {
-    return Promise.reject(error.message);
+    if(error) 
+    return Promise.reject(error.message)
 
 
 }
@@ -22,32 +23,22 @@ export const signup = async user => {
         const {
             data
         } = await axios.post(`${ApiUrl}`, user);
-        console.log(user)
         return data;
 
     } catch (error) {
-        console.log(error)
         return Promise.reject(error.message);
     }
 }
+const   UniqeToken= localStorage.getItem("tokenUniqe")
 
-export const getUserById=async cardid=>{
+export const EditMyuser=async (userID,user)=>{
     try{
-        const {data}=await axios.get(`${ApiUrl}/${cardid}`)
-        console.log(data)
+
+        axios.defaults.headers.common['x-auth-token'] =UniqeToken
+        const {data}=await axios.put(`${ApiUrl}/${userID._id}`, user)
+        
         return data;
     } catch (error) {
-        console.log(error)
-        return Promise.reject(error.message);
-    }
-}
-
-export const EditMyuser=async (cardid,user)=>{
-    try{
-        const {data}=await axios.put(`${ApiUrl}/${cardid}`, user)
-        return data;
-    } catch (error) {
-        console.log(error)
         return Promise.reject(error.message);
     }
 }

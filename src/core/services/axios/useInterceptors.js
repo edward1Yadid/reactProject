@@ -42,7 +42,7 @@ export const useInterceptors=()=>{
 
 
     axios.interceptors.request.use((config) => {
-    
+  
       axios.defaults.headers.common['x-auth-token'] = `${UniqeToken}`
       return config;
     });

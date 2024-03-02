@@ -5,30 +5,48 @@ import useCustomf from '../../core/hooks/form/useCustomf';
 import FormInputControl from '../components/form/FormInputControl';
 import { Box, Container } from '@mui/material';
 import { useUser } from '../Providers/user/UserProvider';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import NavigateToComponents from '../../core/router/NavigateToComponents';
-import normalizeUser from '../../core/services/user/normalizeUser';
+import normalizedUserEdit from '../../core/services/user/normalizedUserEdit';
 import initialSignUpform from "../../core/services/form/initialSignUpform";
-import joischemasignup from "../../core/services/form/joischemasignup";
+import joischemaEditUser from "../../core/services/form/joischemaEditUser";
 import Input from '../components/form/Input';
 import { nestedUserFromApi } from "../../core/services/model/nestedUserFromApi";
-import { defindUser } from '../../core/helpers/userLoggedInLocalStorage';
+import axios from 'axios';
+import { ApiUrl } from '../../core/services/axios/userApiAxios';
 function EditUserProfile() {
+  const navigate = useNavigate();
+  const   UniqeToken= localStorage.getItem("tokenUniqe")
   const [initialDataFromApi, setInitDataFromnApi] = useState(initialSignUpform);
   const { user } = useUser();
-  const { handleEditMyUser,} = useUsers();
+  
+  const { handleEditMyUser} = useUsers();
+  
   const {    value: { datafromApi, errorsFromApi },...rest} = useCustomf(
     initialSignUpform,
-    joischemasignup,
+    joischemaEditUser,
     () => {
-      handleEditMyUser(user, {
-        ...normalizeUser(datafromApi),
-      });
+      const normalizeduSER=  {...normalizedUserEdit(datafromApi)}
+      console.log(normalizeduSER)
+      handleEditMyUser(user, 
+        normalizeduSER
+        
+      );
     });
-
+  const getUserById=async (user)=>{
+      try{
+          const {data}=await axios.get(`${ApiUrl}/${user}`)
+                axios.defaults.headers.common['x-auth-token'] =UniqeToken
+          return data;
+      } catch (error) {
+          console.log(error)
+          return Promise.reject(error.message);
+      }
+  }
     useEffect(() => {
-      defindUser(user._id)
+      getUserById(user._id)
         .then((datafromApi) => {
+          if (user._id !== datafromApi.user_id) navigate(NavigateToComponents.CARDS);
           const nestedUserFromApiUser = nestedUserFromApi(datafromApi);
           setInitDataFromnApi(nestedUserFromApiUser);
           rest.setdatafromApi(nestedUserFromApiUser);
@@ -36,7 +54,7 @@ function EditUserProfile() {
         .catch((error) => {
           console.log(error);
         });
-    }, [user._id]);
+    }, [user]);
 
 
 
@@ -45,7 +63,7 @@ function EditUserProfile() {
 
   return (
     <>
-        <GeneralPageCompenent title={"Edit user profile"} subtitle={""}></GeneralPageCompenent>
+        <GeneralPageCompenent title={"Edit Your Business Card"} subtitle={"Keep Your Information Up-to-Date and Relevant"}></GeneralPageCompenent>
     <Container sx={{ display: "flex", flexDirection: "row" }}>
         <FormInputControl
           title=""
@@ -53,7 +71,7 @@ function EditUserProfile() {
              handleReset={() => rest.setdatafromApi(initialDataFromApi)}
           styles={{ maxWidth: "600px" }}
           onChange={rest.formValidate}
-          to={NavigateToComponents.CardPage}
+          to={NavigateToComponents.HomePage}
         >
           <Container>
             <Box
@@ -77,6 +95,7 @@ function EditUserProfile() {
                   data={datafromApi}
                   error={errorsFromApi.middle}
                   handleChangeFun={rest.onchangeCheckValid}
+                 
                 />
                 <Input
                   name="last"

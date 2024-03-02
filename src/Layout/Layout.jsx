@@ -14,6 +14,7 @@ function Layout({children}) {
 </Main>
 
 <Footer/>
+
 </Box>
 
 

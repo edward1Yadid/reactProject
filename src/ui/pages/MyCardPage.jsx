@@ -9,7 +9,7 @@ import ExpirienceCustomers from '../../core/store/ExpirienceCustomers'
 import useFetchCards from '../../core/hooks/cards/useFetchCards';
 import { useUser } from '../Providers/user/UserProvider';
 function MyCardPage() {
-  const {value:{isloading,error,cards},handleGetMyCards,handleDeleteCard}=useFetchCards()
+  const {value:{Isloading,error,cards},handleGetMyCards,handleDeleteCard}=useFetchCards()
   const { user } = useUser();
   const navigate=useNavigate()
 
@@ -27,13 +27,13 @@ function MyCardPage() {
   return (
     <div>
    
-      <GeneralPageCompenent title={"my Business Card Page"} subtitle={"here you can see your card that you created"}></GeneralPageCompenent>
+      <GeneralPageCompenent title={"My Business Cards"} subtitle={"Create, Manage, and Share Your Digital Business Cards"}></GeneralPageCompenent>
       <Box sx={{ '& > :not(style)': { m: 1 } }}>
       <Fab color="primary" aria-label="add" onClick={()=>{navigate(NavigateToComponents.CREATE_CARD)}}>
         <AddIcon />
       </Fab>
       </Box>
-      <ExpirienceCustomers isloading={isloading} errro={error} cards={cards} deleteMyCard={deleteMyCard} />
+      <ExpirienceCustomers Isloading={Isloading} errro={error} cards={cards} deleteMyCard={deleteMyCard} />
 
     </div>
   )

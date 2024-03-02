@@ -1,5 +1,5 @@
 const  NavigateToComponents={
-HomePage: "/cards",
+HomePage: "/",
 About:"/About-page",
 SignUp:"/signup-page",
 LoginPage:"/login-page",

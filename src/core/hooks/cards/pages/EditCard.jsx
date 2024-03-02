@@ -64,7 +64,7 @@ const EditCard = () => {
           handleReset={() => rest.setdatafromApi(initialDataFromApi)}
           styles={{ maxWidth: "600px" }}
           onChange={rest.formValidate}
-          to={NavigateToComponents.CardPage}
+          to={NavigateToComponents.HomePage}
         >
           <Container>
             <Box

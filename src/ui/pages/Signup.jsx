@@ -2,34 +2,33 @@ import React from "react";
 import useCustomf from "../../core/hooks/form/useCustomf";
 import initialSignUpform from "../../core/services/form/initialSignUpform";
 import FormInputControl from "../components/form/FormInputControl";
-import { Box, Container } from "@mui/material";
+import { Box, Checkbox, Container, FormControlLabel } from "@mui/material";
 import GeneralPageCompenent from "../components/generalPage/GeneralPageCompenent";
 import NavigateToComponents from "../../core/router/NavigateToComponents";
-import joischemasignup from "../../core/services/form/joischemasignup";
+import initialschemasnignup from "../../core/services/form/initialschemasnignup";
 import useUsers from "../../core/hooks/users/useUsers";
 import Input from "../components/form/Input";
 
-import CheckBocomponents from "../components/form/CheckBocomponents";
 function Signup() {
   const { handleSignUpuser } = useUsers();
   const { value, ...rest } = useCustomf(
     initialSignUpform,
-    joischemasignup,
+    initialschemasnignup,
     handleSignUpuser
   );
 
   return (
     <>
-      <GeneralPageCompenent title="signup page"></GeneralPageCompenent>
+      <GeneralPageCompenent  title="Register"></GeneralPageCompenent>
 
-      <Container sx={{ display: "flex", flexDirection: "row" }}>
+      <Container sx={{ display: "flex", flexDirection: "row" ,}}>
         <FormInputControl
           title=""
           handleSubmit={rest.handleonSubmitFun}
           handleReset={rest.resetDataFromForm}
           styles={{ maxWidth: "600px" }}
           onChange={rest.formValidate}
-          to={NavigateToComponents.CardPage}
+          to={NavigateToComponents.HomePage}
         >
           <Container>
             <Box
@@ -148,7 +147,22 @@ function Signup() {
               </Box>
             </Box>
             <Box>
-              <CheckBocomponents></CheckBocomponents>
+              <FormControlLabel
+                onChange={(e) =>
+                  rest.setdatafromApi({
+                    ...value.datafromApi,
+                    isBusiness: !!e.target.checked,
+                  })
+                }
+                name="isBusiness"
+                control={
+                  <Checkbox
+                    value={value.datafromApi.isBusiness}
+                    color="primary"
+                  />
+                }
+                label="Signup as business"
+              ></FormControlLabel>
             </Box>
           </Container>
         </FormInputControl>

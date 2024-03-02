@@ -2,7 +2,8 @@ import { jwtDecode } from "jwt-decode";
 
 let user;
 let tokenUniqe="tokenUniqe"
-export const defindUser=()=>{
+export const 
+defindUser=()=>{
     try{
 user=localStorage.getItem(tokenUniqe)
 return jwtDecode(user)

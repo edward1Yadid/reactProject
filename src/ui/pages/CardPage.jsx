@@ -6,7 +6,7 @@ import ExpirienceCustomers from "../../core/store/ExpirienceCustomers";
 
 const CardPage = ({}) => {
   const {
-    value: {isloading, error ,filteredCards},
+    value: {Isloading, error ,filteredCards},
     handleGetAllCard,
     handleDeleteCard,
     handleGetMyCards
@@ -27,10 +27,10 @@ const deleteMyCard= async (cardid)=>{
   return (
     <Container>
       <GeneralPageCompenent
-        title="cards of all customers"
-        subtitle="Here you can find business cards from all categories from all the customers"
+        title="Welcome to Your Business Card Hub"
+        subtitle="Manage and Showcase Your Professional Identity"
       />
-      <ExpirienceCustomers isloading={isloading} errro={error} cards={filteredCards} deleteMyCard={deleteMyCard}/>
+      <ExpirienceCustomers Isloading={Isloading} errro={error} cards={filteredCards} deleteMyCard={deleteMyCard}/>
     </Container>
   );
 };
