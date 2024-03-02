@@ -13,6 +13,7 @@ import {
   Divider,
   Link,
 } from "@mui/material";
+import { Box } from "@mui/system";
 
 const CardDetailPage = () => {
   const { id } = useParams();
@@ -36,7 +37,8 @@ const CardDetailPage = () => {
         title={"Business Details"}
         subtitle="Here you can find all the information about the customer business card."
       ></GeneralPageCompenent>
-      <Container>
+      <Container sx={{display:"flex",flexDirection:"row",flexWrap:"wrap",gap:"1rem",justifyContent:"space-around"}}>
+        <Box>
         <Card sx={{ maxWidth: 600, margin: "auto", marginTop: 5 }}>
           <CardMedia
             component="img"
@@ -93,16 +95,22 @@ sx={{maxHeight:"25rem"}}
             </Typography>
           </CardContent>
         </Card>
-        <iframe
+        </Box>
+       
+        <Box mt={5} sx={{border: "2px solid gray",p:1}}>
+          <Typography variant="h4" color="initial" sx={{textDecoration:"underline"}}>company Address:</Typography>
+        <iframe 
           title="Google Maps"
           width="100%"
-          height="300"
+          height="520"
           loading="lazy"
           allowFullScreen
           frameBorder="0"
-          // src={mapUrl}
+          src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyC6oPieiC3i5m1OCvo04wh1jJCPSRwZcOQ&q=${card?.address?.state}, ${card?.address?.country}, ${card?.address?.city}, ${card?.address?.street},${card?.address?.houseNumber}`}>
       
-        ></iframe>
+        </iframe>
+        </Box>
+      
       </Container>
     </Container>
   );

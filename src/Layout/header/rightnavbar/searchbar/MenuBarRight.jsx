@@ -43,7 +43,7 @@ const MenuBarRight = () => {
           <Box >
           <Tooltip title="Open settings">
             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-              <Avatar alt="me" src="/assets/images/avatar.png" sx={{ display: { xs: "none", md: "flex" } }}> </Avatar>
+              <Avatar alt="me" src="./assets/images/avatar.png" sx={{ display: { xs: "none", md: "flex" } }}> </Avatar>
               <LinearScaleOutlinedIcon sx={{display: { xs: "flex", md: "none" },mr:1}} />
             </IconButton>
           </Tooltip>

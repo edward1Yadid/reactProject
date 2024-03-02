@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {
   Typography,
-  Paper,
   Grid,
   ListItemIcon,
   ListItemText,
@@ -13,14 +12,12 @@ import { ApiUrl } from "../../core/services/axios/userApiAxios";
 import { Link } from "react-router-dom";
 import { Box, Container } from "@mui/system";
 import { List, ListItem } from "@mui/material";
-import {  FaSquareFacebook } from "react-icons/fa6";
+import { FaSquareFacebook } from "react-icons/fa6";
 import { FaGoogle } from "react-icons/fa";
 import { FaTwitter } from "react-icons/fa";
 import { MdDrafts } from "react-icons/md";
 import { TbReportSearch } from "react-icons/tb";
 import GeneralPageComponent from "../components/generalPage/GeneralPageCompenent";
-
-
 
 const UserProlie = () => {
   const [initialDataFromApi, setInitDataFromnApi] = useState(null);
@@ -49,16 +46,16 @@ const UserProlie = () => {
   const handleEmailClick = () => {
     window.location.href = `mailto:${initialDataFromApi?.email}`;
   };
- 
-  return (
 
-    <Container 
-      sx={{ mt: 10, width: "100%", height: "95%", padding: 2, borderRadius: 2   
-      }}
+  return (
+    <Container
+      sx={{ mt: 10, width: "100%", height: "95%", padding: 2, borderRadius: 2 }}
       elevation={3}
     >
-
-      <GeneralPageComponent title="Your Professional Profile" subtitle={"Showcase Your Skills and Contact Information"} />
+      <GeneralPageComponent
+        title="Your Professional Profile"
+        subtitle={"Showcase Your Skills and Contact Information"}
+      />
       <Grid container spacing={3}>
         <Grid
           item
@@ -82,90 +79,155 @@ const UserProlie = () => {
           md={8}
           sx={{ display: "flex", flexDirection: "column" }}
         >
-          <Typography variant="h3"textAlign={"left"}>
+          <Typography variant="h3" textAlign={"left"}>
             Owner name: {initialDataFromApi?.name?.first}{" "}
             {initialDataFromApi?.name?.last}
           </Typography>
-<Divider></Divider>
+          <Divider></Divider>
           <Box sx={{ bottom: 0, left: 0, right: 0 }}>
-          <Typography variant="h4" textAlign="left" m={2}>
-  Phone: {initialDataFromApi?.phone}
-</Typography>
+            <Typography variant="h4" textAlign="left" m={2}>
+              Phone: {initialDataFromApi?.phone}
+            </Typography>
 
-<Typography variant="h4" textAlign="left" m={2}>
-  Email: {initialDataFromApi?.email}
-</Typography>
+            <Typography variant="h4" textAlign="left" m={2}>
+              Email: {initialDataFromApi?.email}
+            </Typography>
 
-<Typography variant="h4" textAlign="left" m={2}>
-  Address:{" "}
- {initialDataFromApi?.address?.country} , {initialDataFromApi?.address?.city},{initialDataFromApi?.address?.street},{initialDataFromApi?.address?.houseNumber}
-</Typography>
+            <Typography variant="h4" textAlign="left" m={2}>
+              Address: {initialDataFromApi?.address?.country} ,{" "}
+              {initialDataFromApi?.address?.city},
+              {initialDataFromApi?.address?.street},
+              {initialDataFromApi?.address?.houseNumber}
+            </Typography>
           </Box>
-         
-          <Grid container >
-      
-          <List component="nav" sx={{ border: "2px solid gray", borderRadius: "20px" ,"&:hover": { backgroundColor: "ActiveBorder" },mt:5 }}>
-  <Typography variant="h5" color="initial">
-    Connect with Us
-  </Typography>
 
-  <ListItem sx={{ width: "350px", "&:hover": { backgroundColor: "#f0f0f0" ,color:"inherit"} }}>
-    <ListItemIcon>
-      <FaGoogle />
-    </ListItemIcon>
-    <Link to={"https://www.google.com/"} target="_blank" rel="noopener">
-      <ListItemText primary="Google" />
-    </Link>
-  </ListItem>
+          <Container sx={{display:"flex",flexDirection:"row-reverse",flexWrap:"wrap",gap:"1rem",justifyContent:"space-around"}}>
+            <Box mt={5} sx={{         border: "2px solid gray",  borderRadius: "20px", p: 1 }}>
+              <Typography
+                variant="h4"
+                color="initial"
+                sx={{ textDecoration: "underline" }}
+              >
+                company Address:
+              </Typography>
+              <iframe
+                style={{ borderRadius: "50px" }}
+                title="Google Maps"
+                width="100%"
+                height="220"
+                loading="lazy"
+                allowFullScreen
+                frameBorder="0"
+                src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyC6oPieiC3i5m1OCvo04wh1jJCPSRwZcOQ&q=${initialDataFromApi?.address?.state}, ${initialDataFromApi?.address?.country}, ${initialDataFromApi?.address?.city}, ${initialDataFromApi?.address?.street},${initialDataFromApi?.address?.houseNumber}`}
+              ></iframe>
+            </Box>
+            <List
+              component="nav"
+              sx={{
+                border: "2px solid gray",
+                borderRadius: "20px",
+                "&:hover": { backgroundColor: "ActiveBorder" },
+                mt: 5,
+              }}
+            >
+              <Typography variant="h5" color="initial">
+                Connect with Us
+              </Typography>
 
-  <ListItem sx={{ width: "350px", "&:hover": { backgroundColor: "#f0f0f0" ,color:"inherit"} }}>
-    <ListItemIcon>
-      <FaTwitter />
-    </ListItemIcon>
-    <Link to={"https://twitter.com/"} target="_blank" rel="noopener">
-      <ListItemText primary="Twitter" />
-    </Link>
-  </ListItem>
-  <ListItem sx={{ width: "350px", "&:hover": { backgroundColor: "#f0f0f0" ,color:"inherit"} }}>
-    <ListItemIcon>
-      <MdDrafts />
-    </ListItemIcon>
-    <Link
-      target="_blank"
-      rel="noopener noreferrer"
-      underline="hover"
-      component="button"
-      onClick={handleEmailClick}
-    >
-      <ListItemText primary="Send a Message" />
-    </Link>
-  </ListItem>
+              <ListItem
+                sx={{
+                  width: "350px",
+                  "&:hover": { backgroundColor: "#f0f0f0", color: "inherit" },
+                }}
+              >
+                <ListItemIcon>
+                  <FaGoogle />
+                </ListItemIcon>
+                <Link
+                  to={"https://www.google.com/"}
+                  target="_blank"
+                  rel="noopener"
+                >
+                  <ListItemText primary="Google" />
+                </Link>
+              </ListItem>
 
-  <ListItem sx={{ width: "350px", "&:hover": { backgroundColor: "#f0f0f0" ,color:"inherit"} }}>
-    <ListItemIcon>
-      <FaSquareFacebook />
-    </ListItemIcon>
-    <Link to={"https://www.facebook.com/"} target="_blank" rel="noopener">
-      <ListItemText primary="Facebook" />
-    </Link>
-  </ListItem>
+              <ListItem
+                sx={{
+                  width: "350px",
+                  "&:hover": { backgroundColor: "#f0f0f0", color: "inherit" },
+                }}
+              >
+                <ListItemIcon>
+                  <FaTwitter />
+                </ListItemIcon>
+                <Link
+                  to={"https://twitter.com/"}
+                  target="_blank"
+                  rel="noopener"
+                >
+                  <ListItemText primary="Twitter" />
+                </Link>
+              </ListItem>
+              <ListItem
+                sx={{
+                  width: "350px",
+                  "&:hover": { backgroundColor: "#f0f0f0", color: "inherit" },
+                }}
+              >
+                <ListItemIcon>
+                  <MdDrafts />
+                </ListItemIcon>
+                <Link
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  underline="hover"
+                  component="button"
+                  onClick={handleEmailClick}
+                >
+                  <ListItemText primary="Send a Message" />
+                </Link>
+              </ListItem>
 
-  <ListItem sx={{ width: "350px", "&:hover": { backgroundColor: "#f0f0f0" ,color:"inherit"} }}>
-    <ListItemIcon>
-      <TbReportSearch />
-    </ListItemIcon>
-    <Link to={"https://www.tase.co.il/he"} target="_blank" rel="noopener">
-      <ListItemText primary="Financial Reports" />
-    </Link>
-  </ListItem>
-</List>
+              <ListItem
+                sx={{
+                  width: "350px",
+                  "&:hover": { backgroundColor: "#f0f0f0", color: "inherit" },
+                }}
+              >
+                <ListItemIcon>
+                  <FaSquareFacebook />
+                </ListItemIcon>
+                <Link
+                  to={"https://www.facebook.com/"}
+                  target="_blank"
+                  rel="noopener"
+                >
+                  <ListItemText primary="Facebook" />
+                </Link>
+              </ListItem>
 
-
-    </Grid>
+              <ListItem
+                sx={{
+                  width: "350px",
+                  "&:hover": { backgroundColor: "#f0f0f0", color: "inherit" },
+                }}
+              >
+                <ListItemIcon>
+                  <TbReportSearch />
+                </ListItemIcon>
+                <Link
+                  to={"https://www.tase.co.il/he"}
+                  target="_blank"
+                  rel="noopener"
+                >
+                  <ListItemText primary="Financial Reports" />
+                </Link>
+              </ListItem>
+            </List>
+          </Container>
         </Grid>
-        
       </Grid>
-
     </Container>
   );
 };

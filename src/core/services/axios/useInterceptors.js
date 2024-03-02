@@ -51,7 +51,6 @@ export const useInterceptors=()=>{
       (response) => response,
       (error) => {
   const errorMessage= errors[error.response.status].description
-  console.log(errorMessage)
         return Promise.reject(errorMessage);
       }
     );

@@ -69,7 +69,9 @@ const snackMessage=useSnackbar()
       try {
         const normalizedUser = normalizeUser(user);
         await signup(normalizedUser);
+        navigate(()=>NavigateToComponents.LoginPage)
         await loginApi({ email: user.email, password: user.password });
+     
         snackMessage("Congratulations! You have successfully signed up. 🎉", {
           color: "success",
           variant: "filled",
