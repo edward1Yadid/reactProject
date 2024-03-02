@@ -9,7 +9,7 @@ import SnackbarProvider from "./ui/Providers/SnackBarProvider";
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
+      <BrowserRouter basename="reactProject">
         <ThemeProvider>
           <SnackbarProvider>
             <UserProvider>
