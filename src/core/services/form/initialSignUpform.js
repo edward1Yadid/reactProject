@@ -13,7 +13,7 @@ const initialSignUpform = {
     street: "",
     houseNumber: "",
     zip: 0,
-    isBusiness: true,
+    isBusiness: false,
 
 };
 
