@@ -1,74 +1,72 @@
-import React, { useEffect, useState } from 'react'
-import GeneralPageCompenent from '../components/generalPage/GeneralPageCompenent'
-import useUsers from '../../core/hooks/users/useUsers';
-import useCustomf from '../../core/hooks/form/useCustomf';
-import FormInputControl from '../components/form/FormInputControl';
-import { Box, Container } from '@mui/material';
-import { useUser } from '../Providers/user/UserProvider';
-import { Navigate, useNavigate } from 'react-router-dom';
-import NavigateToComponents from '../../core/router/NavigateToComponents';
-import normalizedUserEdit from '../../core/services/user/normalizedUserEdit';
+import React, { useEffect, useState } from "react";
+import GeneralPageCompenent from "../components/generalPage/GeneralPageCompenent";
+import useUsers from "../../core/hooks/users/useUsers";
+import useCustomf from "../../core/hooks/form/useCustomf";
+import FormInputControl from "../components/form/FormInputControl";
+import { Box, Container } from "@mui/material";
+import { useUser } from "../Providers/user/UserProvider";
+import { Navigate, useNavigate } from "react-router-dom";
+import NavigateToComponents from "../../core/router/NavigateToComponents";
+import normalizedUserEdit from "../../core/services/user/normalizedUserEdit";
 import initialSignUpform from "../../core/services/form/initialSignUpform";
 import joischemaEditUser from "../../core/services/form/joischemaEditUser";
-import Input from '../components/form/Input';
+import Input from "../components/form/Input";
 import { nestedUserFromApi } from "../../core/services/model/nestedUserFromApi";
-import axios from 'axios';
-import { ApiUrl } from '../../core/services/axios/userApiAxios';
+import axios from "axios";
+import { ApiUrl } from "../../core/services/axios/userApiAxios";
 function EditUserProfile() {
   const navigate = useNavigate();
-  const   UniqeToken= localStorage.getItem("tokenUniqe")
+  const UniqeToken = localStorage.getItem("tokenUniqe");
   const [initialDataFromApi, setInitDataFromnApi] = useState(initialSignUpform);
   const { user } = useUser();
-  
-  const { handleEditMyUser} = useUsers();
-  
-  const {    value: { datafromApi, errorsFromApi },...rest} = useCustomf(
-    initialSignUpform,
-    joischemaEditUser,
-    () => {
-      const normalizeduSER=  {...normalizedUserEdit(datafromApi)}
-      console.log(normalizeduSER)
-      handleEditMyUser(user, 
-        normalizeduSER
-        
-      );
-    });
-  const getUserById=async (user)=>{
-      try{
-          const {data}=await axios.get(`${ApiUrl}/${user}`)
-                axios.defaults.headers.common['x-auth-token'] =UniqeToken
-          return data;
-      } catch (error) {
-          console.log(error)
-          return Promise.reject(error.message);
-      }
-  }
-    useEffect(() => {
-      getUserById(user._id)
-        .then((datafromApi) => {
-          if (user._id !== datafromApi.user_id) navigate(NavigateToComponents.CARDS);
-          const nestedUserFromApiUser = nestedUserFromApi(datafromApi);
-          setInitDataFromnApi(nestedUserFromApiUser);
-          rest.setdatafromApi(nestedUserFromApiUser);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }, [user]);
 
+  const { handleEditMyUser } = useUsers();
 
+  const {
+    value: { datafromApi, errorsFromApi },
+    ...rest
+  } = useCustomf(initialSignUpform, joischemaEditUser, () => {
+    const normalizeduSER = { ...normalizedUserEdit(datafromApi) };
+    handleEditMyUser(user, normalizeduSER);
+  });
+  const getUserById = async (user) => {
+    try {
+      const {data} = await axios.get(`${ApiUrl}/${user}`);
+      axios.defaults.headers.common["x-auth-token"] = UniqeToken;
+
+      return data;
+    } catch (error) {
+      return Promise.reject(error.message);
+    }
+  };
+  useEffect(() => {
+    getUserById(user._id)
+      .then((datafromApi) => {
+        if (user._id !== datafromApi.user_id)
+          navigate(NavigateToComponents.CARDS);
+        const nestedUserFromApiUser = nestedUserFromApi(datafromApi);
+        setInitDataFromnApi(nestedUserFromApiUser);
+        rest.setdatafromApi(nestedUserFromApiUser);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  }, [user]);
 
   if (!user || !user.isBusiness)
     return <Navigate to={NavigateToComponents.HomePage}></Navigate>;
 
   return (
     <>
-        <GeneralPageCompenent title={"Edit Your Business Card"} subtitle={"Keep Your Information Up-to-Date and Relevant"}></GeneralPageCompenent>
-    <Container sx={{ display: "flex", flexDirection: "row" }}>
+      <GeneralPageCompenent
+        title={"Edit Your Business Card"}
+        subtitle={"Keep Your Information Up-to-Date and Relevant"}
+      ></GeneralPageCompenent>
+      <Container sx={{ display: "flex", flexDirection: "row" }}>
         <FormInputControl
           title=""
           handleSubmit={rest.handleonSubmitFun}
-             handleReset={() => rest.setdatafromApi(initialDataFromApi)}
+          handleReset={() => rest.setdatafromApi(initialDataFromApi)}
           styles={{ maxWidth: "600px" }}
           onChange={rest.formValidate}
           to={NavigateToComponents.HomePage}
@@ -95,7 +93,6 @@ function EditUserProfile() {
                   data={datafromApi}
                   error={errorsFromApi.middle}
                   handleChangeFun={rest.onchangeCheckValid}
-                 
                 />
                 <Input
                   name="last"
@@ -112,7 +109,7 @@ function EditUserProfile() {
                   error={errorsFromApi.phone}
                   handleChangeFun={rest.onchangeCheckValid}
                 />
-   
+
                 <Input
                   name="url"
                   label="image url"
@@ -120,7 +117,7 @@ function EditUserProfile() {
                   error={errorsFromApi.url}
                   handleChangeFun={rest.onchangeCheckValid}
                 />
-                         <Input
+                <Input
                   name="alt"
                   label="image alt"
                   data={datafromApi}
@@ -129,7 +126,6 @@ function EditUserProfile() {
                 />
               </Box>
               <Box>
-       
                 <Input
                   name="state"
                   label="state"
@@ -176,13 +172,11 @@ function EditUserProfile() {
                 />
               </Box>
             </Box>
-       
           </Container>
         </FormInputControl>
       </Container>
     </>
-
-  )
+  );
 }
 
-export default EditUserProfile
+export default EditUserProfile;

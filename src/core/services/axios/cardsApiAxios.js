@@ -1,9 +1,7 @@
 import axios from "axios";
 import manageUserLogged from "./manageUserLogged";
 
-const ApiUrl =
-  process.env.REACT_APP_API_URL ||
-  "https://monkfish-app-z9uza.ondigitalocean.app/bcard2/cards";
+const ApiUrl = "http://localhost:9191/cards";
 
 // const {token}=manageUserLogged()
 // axios.defaults.headers.common['Authorization'] =token;

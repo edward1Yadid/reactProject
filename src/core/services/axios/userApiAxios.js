@@ -1,13 +1,14 @@
 import axios from "axios"
 
 
-const count=0
 
-export const ApiUrl="https://monkfish-app-z9uza.ondigitalocean.app/bcard2/users"
+
+export const ApiUrl=  "http://localhost:9191/users"
 
     export const loginApi= async (user)=>{
         try{
         const response = await axios.post(`${ApiUrl}/login`,user)
+  
         return response.data
 }
  catch (error) {
@@ -23,6 +24,7 @@ export const signup = async user => {
         const {
             data
         } = await axios.post(`${ApiUrl}`, user);
+
         return data;
 
     } catch (error) {

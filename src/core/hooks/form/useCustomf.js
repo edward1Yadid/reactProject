@@ -58,6 +58,7 @@ const resetDataFromForm= useCallback(()=>{
 
 const handleonSubmitFun=useCallback(()=>{
     handleonSubmit(datafromApi)///פונקציה שנבנית על הדאטה שנשלחת 
+
 },[datafromApi,handleonSubmit])
 
 
